@@ -92,6 +92,10 @@ function getItems() {
         }
     }
 
+    $('.delete_button').click(function () {
+        $(this).closest('tr').remove();
+    });
+
 
     console.log(items.length);
 
