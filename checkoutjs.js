@@ -1,7 +1,6 @@
 $(getItems());
 
 
-
 //console.log(items);
 //var items = new Array();
 
@@ -28,8 +27,8 @@ function Item(name, amount, price) {
     }
 }
 
-addToArray(new Item("div", 1, 9.99));
-addToArray(new Item("div", 1, 9.99));*/
+ addToArray(new Item("div", 1, 9.99));
+ addToArray(new Item("div", 1, 9.99));*/
 
 
 
@@ -41,25 +40,51 @@ function getItems() {
             name: "div",
             amount: 3,
             price: 9.99
-        }}, {
+        }
+    }, {
         p: {
             name: "p",
             amount: 2,
             price: 10
         }
-    }];
+    }, {
+        img: {
+            name: 'img',
+            amount: 3,
+            price: 20
+        }
+    },
+        {
+            table: {
+                name: 'table',
+                amount: 3,
+                price: 100
+            }
+
+
+        }];
 
     items.push = new Item("div", 1, 9.99);
     items.push = new Item("div", 1, 9.99);
-    items.forEach(function(items) {
+    items.forEach(function (items) {
         console.log(items);
     });
 
 
-    for(var i = 0; i < items.length; ++i) {
-        for(var x in items[i]) {
-            console.log("namn: " + items[i][x].name);
-            console.log("antal: " + items[i][x].amount);
+    for (var i = 0; i < items.length; ++i) {
+
+        for (var x in items[i]) {
+            $('.check').parent().append(
+                '<tr>' + '<td>' + items[i][x].name
+                + '</td>'
+                + '<td>'
+                + items[i][x].amount
+                + '</td>'
+                + '<td>'
+                + (items[i][x].price * items[i][x].amount)
+                + '</td>'
+                + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
+
             console.log("total: " + items[i][x].amount * items[i][x].price);
         }
     }
@@ -70,11 +95,11 @@ function getItems() {
 
     var divAmount = 0;
     var pAmount = 0;
-    for(var j = 0; j < items.length; ++j) {
-        if(items[j].name === "div") {
+    for (var j = 0; j < items.length; ++j) {
+        if (items[j].name === "div") {
             ++divAmount;
         }
-        else if(items[j].name === "p") {
+        else if (items[j].name === "p") {
             ++pAmount;
         }
     }
