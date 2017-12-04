@@ -50,7 +50,7 @@ function getItems() {
     }, {
         img: {
             name: 'img',
-            amount: 3,
+            amount: 0,
             price: 20
         }
     },
@@ -72,20 +72,23 @@ function getItems() {
 
 
     for (var i = 0; i < items.length; ++i) {
-
         for (var x in items[i]) {
-            $('.check').parent().append(
-                '<tr>' + '<td>' + items[i][x].name
-                + '</td>'
-                + '<td>'
-                + items[i][x].amount
-                + '</td>'
-                + '<td>'
-                + (items[i][x].price * items[i][x].amount)
-                + '</td>'
-                + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
+            if (items[i][x].amount !== 0) {
+                $('.check').parent().append(
+                    '<tr>' + '<td>' + items[i][x].name
+                    + '</td>'
+                    + '<td>'
+                    + items[i][x].amount
+                    + '</td>'
+                    + '<td>'
+                    + (items[i][x].price * items[i][x].amount)
+                    + '</td>'
+                    + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
 
-            console.log("total: " + items[i][x].amount * items[i][x].price);
+                console.log("total: " + items[i][x].amount * items[i][x].price);
+            } else {
+                console.log("check")
+            }
         }
     }
 
