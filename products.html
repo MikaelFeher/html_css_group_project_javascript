@@ -3,9 +3,10 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="style.css">
 	<title>Webshop - Produkter</title>
 </head>
@@ -48,13 +49,13 @@
 				<div class="table_container">
 					<h2>HTML</h2>
 
-					<table>
+					<table id="html_table">
 						<tr>
 							<th>Namn</th>
 							<th>pris</th>
 							<th></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td>div</td>
 							<td>10kr</td>
 							<td>
@@ -67,18 +68,18 @@
 							<td>
 								<button class="product_buy_button">Köp</button>
 							</td>
-						</tr>
+						</tr> -->
 					</table>
 				</div>
 				<div class="table_container">
 					<h2>CSS</h2>
-					<table>
+					<table id="css_table">
 						<tr>
 							<th>Namn</th>
 							<th>pris</th>
 							<th></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td>font-weight</td>
 							<td>50kr</td>
 							<td>
@@ -91,7 +92,7 @@
 							<td>
 								<button class="product_buy_button">Köp</button>
 							</td>
-						</tr>
+						</tr> -->
 					</table>
 				</div>
 			</div>
@@ -120,11 +121,14 @@
 			<p>Kontakta gärna vår kundtjänst:</p>
 			<ul class="footer_contact_list">
 				<li class="footer_contact_listitem">Telefon: 555-1234</li>
-				<a href="mailto:contact@webshop.com">  <li class="footer_contact_listitem">Email: contact@webshop.com</li></a>  
+				<a href="mailto:contact@webshop.com">  <li class="footer_contact_listitem">Email: contact@webshop.com</li></a>
 			</ul>
 		</div>
 	</footer>
 	<!-- FOOTER end -->
+	<script type="text/javascript" src="products.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+
 </body>
 
 </html>
