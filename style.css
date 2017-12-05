@@ -310,11 +310,9 @@ select {
 	margin-top: 50px;
 	margin-bottom: 30px;
 }
-#checkout .contactForm {
-	width: 500px;
-}
+
 #checkout table {
-	width: 500px;
+	width: 600px;
 	margin: 0 auto;
 	margin-top: 2%;
 	margin-bottom: 1%;
@@ -360,7 +358,7 @@ select {
 	box-shadow: 0px 0px 7px 0 #333;
 	display: flex;
 	justify-content: space-around;
-	width: 50%;
+	width: 600px;
 	margin: 0 auto;
 }
 #checkout form .left_side {
@@ -490,14 +488,14 @@ footer {
 	/********CHECKOUT********/
 
 	#checkout .contactForm {
-		width: 300px;
+		width: 600px;
 	}
 	#checkout table {
 		width: 300px;
 	}
 	#checkout form {
 		flex-direction: column;
-		width: 200px;
+		width: 600px;
 	}
 	#empty_cart_button_container {
 		margin: 0;

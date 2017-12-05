@@ -32,12 +32,17 @@ function getItems() {
         }];
 
 
-     total = 0;
+    var total = 0;
     for (var i = 0; i < items.length; ++i) {
         for (var x in items[i]) {
             if (items[i][x].amount !== 0) {
                 $('.check').parent().append(
-                    '<tr data-price='+items[i][x].price+ ' ' +'data-amount='+ items[i][x].amount+ '>' + '<td>' + items[i][x].name
+                    '<tr data-price=' + items[i][x].price
+                    + ' '
+                    + 'data-amount=' + items[i][x].amount
+                    + '>'
+                    + '<td>'
+                    + items[i][x].name
                     + '</td>'
                     + '<td>'
                     + items[i][x].amount
@@ -47,10 +52,9 @@ function getItems() {
                     + '</td>'
                     + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
 
-
-                console.log(items[i][x].name+': '+ + items[i][x].amount * items[i][x].price);
                 total += items[i][x].amount * items[i][x].price;
-                console.log(total);
+
+
             } else {
                 console.log("zero amounts given")
             }
@@ -68,31 +72,38 @@ function getItems() {
             + '</td>'
             + '<td id="totalPrice">'
             + total
-            + 'kr'
+            + ' kr'
             + '</td>');
     }
 
 
     $('.delete_button').click(function () {
         $(this).closest('tr').remove();
-        var subPrice= $(this).closest('tr').data('price');
-        var subAmount= $(this).closest('tr').data('amount');
+        var subPrice = $(this).closest('tr').data('price');
+        var subAmount = $(this).closest('tr').data('amount');
 
-        var subTotal=subPrice*subAmount;
-        total=Math.round(total-subTotal).toFixed(2);
-        $('#totalPrice').text(total);
+        var subTotal = subPrice * subAmount;
+        total = Math.round(total - subTotal).toFixed(2);
+        $('#totalPrice').text(total + " kr");
+        console.log(total);
+        if (total < 1) {
+            emptyCart();
+        }
     });
 
 
     $('.empty').click(function () {
-        total=0;
+        emptyCart();
+    });
+
+    function emptyCart() {
+        total = 0;
         console.log(total)
         $('#totPrice').empty();
         $('tr').remove();
         $(this).remove();
         $('table').html('Varukorgen är tom');
-
-    });
+    }
 
 
     var divAmount = 0;
