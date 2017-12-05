@@ -32,12 +32,12 @@ function getItems() {
         }];
 
 
-     total = 0;
+    total = 0;
     for (var i = 0; i < items.length; ++i) {
         for (var x in items[i]) {
             if (items[i][x].amount !== 0) {
                 $('.check').parent().append(
-                    '<tr data-price='+items[i][x].price+ ' ' +'data-amount='+ items[i][x].amount+ '>' + '<td>' + items[i][x].name
+                    '<tr data-price=' + items[i][x].price + ' ' + 'data-amount=' + items[i][x].amount + '>' + '<td>' + items[i][x].name
                     + '</td>'
                     + '<td>'
                     + items[i][x].amount
@@ -48,7 +48,7 @@ function getItems() {
                     + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
 
 
-                console.log(items[i][x].name+': '+ + items[i][x].amount * items[i][x].price);
+                console.log(items[i][x].name + ': ' + +items[i][x].amount * items[i][x].price);
                 total += items[i][x].amount * items[i][x].price;
                 console.log(total);
             } else {
@@ -75,47 +75,35 @@ function getItems() {
 
     $('.delete_button').click(function () {
         $(this).closest('tr').remove();
-        var subPrice= $(this).closest('tr').data('price');
-        var subAmount= $(this).closest('tr').data('amount');
+        var subPrice = $(this).closest('tr').data('price');
+        var subAmount = $(this).closest('tr').data('amount');
 
-        var subTotal=subPrice*subAmount;
-        total=Math.round(total-subTotal).toFixed(2);
-        $('#totalPrice').text(total);
+        var subTotal = subPrice * subAmount;
+        total = Math.round(total - subTotal).toFixed(2);
+        $('#totalPrice').text(total + ' kr');
+
+        if (total < 1) {
+
+            emptyCart();
+
+        }
     });
 
 
     $('.empty').click(function () {
-        total=0;
-        console.log(total)
-        $('#totPrice').empty();
-        $('tr').remove();
-        $(this).remove();
-        $('table').html('Varukorgen är tom');
+
+        emptyCart();
 
     });
 
-
-    var divAmount = 0;
-    var pAmount = 0;
-    for (var j = 0; j < items.length; ++j) {
-        if (items[j].name === "div") {
-            ++divAmount;
-        }
-        else if (items[j].name === "p") {
-            ++pAmount;
-        }
+    function emptyCart() {
+        total = 0;
+        console.log(total)
+        $('.empty').remove();
+        $('tr').remove();
+        $('table').html('Varukorgen är tom');
     }
-    items.includes("div");
 
-    /**if(items[0].includes("div") || items[0].contains("p")) {
-        if(items.contains("div")) {
-            var all_items = $(".all_items");
-            all_items.append("<tr>");
-            all_items.append("<td>${items.name}</td>");
-            all_items.append("<td>${items.amount}</td>");
-            all_items.append("<td>${items.amount * items.price}</td>");
-            all_items.append("</tr>")
-        }
 
-    }*/
+
 }
