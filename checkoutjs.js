@@ -31,12 +31,13 @@ function getItems() {
 
         }];
 
-   var  total = 0;
+
+     total = 0;
     for (var i = 0; i < items.length; ++i) {
         for (var x in items[i]) {
             if (items[i][x].amount !== 0) {
                 $('.check').parent().append(
-                    '<tr>' + '<td>' + items[i][x].name
+                    '<tr data-price='+items[i][x].price+ ' ' +'data-amount='+ items[i][x].amount+ '>' + '<td>' + items[i][x].name
                     + '</td>'
                     + '<td>'
                     + items[i][x].amount
@@ -55,22 +56,31 @@ function getItems() {
             }
         }
     }
-    $('.check').parent().append('<td>'
-        +'</td>'
-        + '<td>'
-        +'</td>'
-        + '<td>'
-        +'Totalt: '
-        + '</td>'
-        +'<td>'
-        +total
-        + 'kr'
-        +'</td>');
+    totPrice();
 
+    function totPrice() {
+        $('.check').parent().append('<td>'
+            + '</td>'
+            + '<td>'
+            + '</td>'
+            + '<td>'
+            + 'Totalt: '
+            + '</td>'
+            + '<td id="totalPrice">'
+            + total
+            + 'kr'
+            + '</td>');
+    }
 
 
     $('.delete_button').click(function () {
         $(this).closest('tr').remove();
+        var subPrice= $(this).closest('tr').data('price');
+        var subAmount= $(this).closest('tr').data('amount');
+
+        var subTotal=subPrice*subAmount;
+        total=Math.round(total-subTotal).toFixed(2);
+        $('#totalPrice').text(total);
     });
 
 
