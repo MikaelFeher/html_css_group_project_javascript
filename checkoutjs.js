@@ -45,10 +45,8 @@ function getItems() {
                     + (items[i][x].price * items[i][x].amount)
                     + '</td>'
                     + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
-
-
                 console.log(items[i][x].name + ': ' + +items[i][x].amount * items[i][x].price);
-                newTotPrice()
+
 
             } else {
                 console.log("zero amounts given")
@@ -66,7 +64,29 @@ function getItems() {
         + '<td id="totalPrice">'
         + '</td>');
 
+    newTotPrice();
 
+    //Functions
+    function newTotPrice() {
+        sum = 0;
+        $('.price').each(function (index, value) {
+            sum = sum + parseInt(value.textContent);
+            console.log(value.textContent);
+        });
+        $('#totalPrice').text(sum + " kr")
+
+    }
+
+
+    function emptyCart() {
+        sum = 0;
+        $('.empty').remove();
+        $('tr').remove();
+        $('table').html('Varukorgen är tom');
+    }
+
+
+    //ClickEvents
     $('.amount').on('keyup change', function () {
         var amount = +$(this).val();
 
@@ -81,19 +101,6 @@ function getItems() {
         }
 
     });
-
-
-    newTotPrice()
-
-    function newTotPrice() {
-        sum = 0;
-        $('.price').each(function (index, value) {
-            sum = sum + parseInt(value.textContent);
-            console.log(sum + " hej");
-        });
-        $('#totalPrice').text(sum + " kr")
-
-    }
 
 
     $('.delete_button').click(function () {
@@ -121,12 +128,5 @@ function getItems() {
 
     });
 
-
-    function emptyCart() {
-        sum = 0;
-        $('.empty').remove();
-        $('tr').remove();
-        $('table').html('Varukorgen är tom');
-    }
 
 }
