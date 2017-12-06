@@ -94,6 +94,7 @@ function writeTotal() {
 
     //ClickEvents
     $('.amount').on('keyup change', function () {
+
         var amount = +$(this).val();
 
         $(this).parent().next().text(amount * +$(this).closest('tr').data('price'));
@@ -167,7 +168,21 @@ function writeTotal() {
                     console.log("zero amounts given")
                 }
             }
-        }
+        }    $('.amount').on('keyup change', function () {
+
+            var amount = +$(this).val();
+
+            $(this).parent().next().text(amount * +$(this).closest('tr').data('price'));
+            newTotPrice();
+
+            if (amount === 0) {
+                $(this).closest('tr').remove();
+            }
+            if (sum === 0) {
+                emptyCart()
+            }
+
+        });
         $(".delete_button").click(deleteButton);
         if(items.length >= 0) {
             $(".product_buy_button").show();
