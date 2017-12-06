@@ -311,10 +311,10 @@ select {
 	margin-bottom: 30px;
 }
 #checkout .contactForm {
-	width: 500px;
+	width: 600px;
 }
 #checkout table {
-	width: 500px;
+	width: 600px;
 	margin: 0 auto;
 	margin-top: 2%;
 	margin-bottom: 1%;
@@ -323,7 +323,21 @@ select {
 	width: 17%;
 	text-align: center;
 }
+#button-container {
+	width: 600px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
 .delete_button {
+	padding: 3px 5px;
+	background-color: #c10000;
+	color: white;
+	border: none;
+	letter-spacing: .1em;
+	cursor: pointer;
+}
+.reset-button {
 	padding: 3px 5px;
 	background-color: #c10000;
 	color: white;
@@ -519,6 +533,12 @@ footer {
 	}
 	#checkout form .right_side label:nth-child(4) {
 		margin-bottom: 5px;
+	}
+	#button-container {
+		width: 300px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
 	}
 	#empty_cart_button_container {
 		width: 300px;
