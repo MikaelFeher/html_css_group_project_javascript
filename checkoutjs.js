@@ -3,45 +3,28 @@ $(getItems());
 function getItems() {
 
     //var items = [];
-    var items = [{
-            name: "div",
-            amount: 3,
-            price: 9.99
-    }, {
-            name: "p",
-            amount: 2,
-            price: 10
-    }, {
-            name: 'img',
-            amount: 0,
-            price: 20
-    }, {
-            name: 'table',
-            amount: 12,
-            price: 100
-
-    }];
+    var items = JSON.parse(localStorage.getItem('shoppingCart'));
 
     var sum = 0;
-    if(items.length > 0) {
+    if (items.length > 0) {
         for (var i = 0; i < items.length; ++i) {
-                if (items[i].amount !== 0) {
-                    $('.check').parent().append(
-                        '<tr data-price=' + items[i].price + ' ' + 'data-amount=' + items[i].amount + '>' + '<td>' + items[i].name
-                        + '</td>'
-                        + '<td>'
-                        + '<input class="amount" type="number"' + ' value=' + items[i].amount + '>'
-                        + '</td>'
-                        + '<td class="price">'
-                        + (items[i].price * items[i].amount)
-                        + '</td>'
-                        + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
-                    console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
+            if (items[i].amount !== 0) {
+                $('.check').parent().append(
+                    '<tr data-price=' + items[i].price + ' ' + 'data-amount=' + items[i].amount + '>' + '<td>' + items[i].name
+                    + '</td>'
+                    + '<td>'
+                    + '<input class="amount" type="number"' + ' value=' + items[i].amount + '>'
+                    + '</td>'
+                    + '<td class="price">'
+                    + (items[i].price * items[i].amount)
+                    + '</td>'
+                    + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
+                console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
 
 
-                } else {
-                    console.log("zero amounts given")
-                }
+            } else {
+                console.log("zero amounts given")
+            }
         }
 
         writeTotal();
@@ -52,19 +35,19 @@ function getItems() {
 
 
     //Functions
-function writeTotal() {
-    $('.check').parent().append('<td>'
-        + '</td>'
-        + '<td>'
-        + '</td>'
-        + '<td>'
-        + 'Totalt: '
-        + '</td>'
-        + '<td id="totalPrice">'
-        + '</td>');
-    newTotPrice();
+    function writeTotal() {
+        $('.check').parent().append('<td>'
+            + '</td>'
+            + '<td>'
+            + '</td>'
+            + '<td>'
+            + 'Totalt: '
+            + '</td>'
+            + '<td id="totalPrice">'
+            + '</td>');
+        newTotPrice();
 
-}
+    }
 
 
     function newTotPrice() {
@@ -130,10 +113,10 @@ function writeTotal() {
         emptyCart();
     });
 
-    $(".reset-button").click(function() {
+    $(".reset-button").click(function () {
         $('.empty').show();
 
-        if($(".all_items").parent().append === "<div class=\"all_items\">") {
+        if ($(".all_items").parent().append === "<div class=\"all_items\">") {
             $(".all_items").parent().append("<div class=\"all_items\">");
         }
 
@@ -144,23 +127,23 @@ function writeTotal() {
             '        <th></th>\n' +
             '      </tr>');
         for (var i = 0; i < items.length; ++i) {
-                if (items[i].amount !== 0) {
-                    $('.check').parent().append(
-                        '<tr data-price=' + items[i].price + ' ' + 'data-amount=' + items[i].amount + '>' + '<td>' + items[i].name
-                        + '</td>'
-                        + '<td>'
-                        + '<input class="amount" type="number"' + ' value=' + items[i].amount + '>'
-                        + '</td>'
-                        + '<td class="price">'
-                        + (items[i].price * items[i].amount)
-                        + '</td>'
-                        + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
-                    console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
+            if (items[i].amount !== 0) {
+                $('.check').parent().append(
+                    '<tr data-price=' + items[i].price + ' ' + 'data-amount=' + items[i].amount + '>' + '<td>' + items[i].name
+                    + '</td>'
+                    + '<td>'
+                    + '<input class="amount" type="number"' + ' value=' + items[i].amount + '>'
+                    + '</td>'
+                    + '<td class="price">'
+                    + (items[i].price * items[i].amount)
+                    + '</td>'
+                    + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
+                console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
 
 
-                } else {
-                    console.log("zero amounts given")
-                }
+            } else {
+                console.log("zero amounts given")
+            }
         }
         $('.amount').on('keyup change', function () {
 
@@ -178,10 +161,11 @@ function writeTotal() {
 
         });
         $(".delete_button").click(deleteButton);
-        if(items.length >= 0) {
+        if (items.length >= 0) {
             $("form").show();
         }
-    writeTotal()})
+        writeTotal()
+    })
 
     function deleteButton() {
         $(this).closest('tr').remove();
@@ -202,7 +186,7 @@ function writeTotal() {
     }
 
     function emptyCheckout() {
-            $("form").hide();
+        $("form").hide();
     }
 }
 
