@@ -4,54 +4,44 @@ function getItems() {
 
     //var items = [];
     var items = [{
-        div: {
             name: "div",
             amount: 3,
             price: 9.99
-        }
     }, {
-        p: {
             name: "p",
             amount: 2,
             price: 10
-        }
     }, {
-        img: {
             name: 'img',
             amount: 0,
             price: 20
-        }
     }, {
-        table: {
             name: 'table',
             amount: 12,
             price: 100
-        }
 
     }];
 
     var sum = 0;
     if(items.length > 0) {
         for (var i = 0; i < items.length; ++i) {
-            for (var x in items[i]) {
-                if (items[i][x].amount !== 0) {
+                if (items[i].amount !== 0) {
                     $('.check').parent().append(
-                        '<tr data-price=' + items[i][x].price + ' ' + 'data-amount=' + items[i][x].amount + '>' + '<td>' + items[i][x].name
+                        '<tr data-price=' + items[i].price + ' ' + 'data-amount=' + items[i].amount + '>' + '<td>' + items[i].name
                         + '</td>'
                         + '<td>'
-                        + '<input class="amount" type="number"' + ' value=' + items[i][x].amount + '>'
+                        + '<input class="amount" type="number"' + ' value=' + items[i].amount + '>'
                         + '</td>'
                         + '<td class="price">'
-                        + (items[i][x].price * items[i][x].amount)
+                        + (items[i].price * items[i].amount)
                         + '</td>'
                         + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
-                    console.log(items[i][x].name + ': ' + +items[i][x].amount * items[i][x].price);
+                    console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
 
 
                 } else {
                     console.log("zero amounts given")
                 }
-            }
         }
 
         writeTotal();
@@ -154,26 +144,25 @@ function writeTotal() {
             '        <th></th>\n' +
             '      </tr>');
         for (var i = 0; i < items.length; ++i) {
-            for (var x in items[i]) {
-                if (items[i][x].amount !== 0) {
+                if (items[i].amount !== 0) {
                     $('.check').parent().append(
-                        '<tr data-price=' + items[i][x].price + ' ' + 'data-amount=' + items[i][x].amount + '>' + '<td>' + items[i][x].name
+                        '<tr data-price=' + items[i].price + ' ' + 'data-amount=' + items[i].amount + '>' + '<td>' + items[i].name
                         + '</td>'
                         + '<td>'
-                        + '<input class="amount" type="number"' + ' value=' + items[i][x].amount + '>'
+                        + '<input class="amount" type="number"' + ' value=' + items[i].amount + '>'
                         + '</td>'
                         + '<td class="price">'
-                        + (items[i][x].price * items[i][x].amount)
+                        + (items[i].price * items[i].amount)
                         + '</td>'
                         + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
-                    console.log(items[i][x].name + ': ' + +items[i][x].amount * items[i][x].price);
+                    console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
 
 
                 } else {
                     console.log("zero amounts given")
                 }
-            }
-        }    $('.amount').on('keyup change', function () {
+        }
+        $('.amount').on('keyup change', function () {
 
             var amount = +$(this).val();
 
