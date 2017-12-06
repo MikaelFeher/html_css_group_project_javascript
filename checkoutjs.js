@@ -88,6 +88,7 @@ function writeTotal() {
         $('.empty').hide();
         $('tr').remove();
         $('table').html('Varukorgen är tom');
+        emptyCheckout();
     }
 
 
@@ -131,7 +132,6 @@ function writeTotal() {
     $('.empty').click(function () {
 
         emptyCart();
-
     });
 
     $(".reset-button").click(function() {
@@ -169,6 +169,9 @@ function writeTotal() {
             }
         }
         $(".delete_button").click(deleteButton);
+        if(items.length >= 0) {
+            $(".product_buy_button").show();
+        }
     writeTotal()})
 
     function deleteButton() {
@@ -187,6 +190,10 @@ function writeTotal() {
             emptyCart();
 
         }
+    }
+
+    function emptyCheckout() {
+            $(".product_buy_button").hide();
     }
 }
 
