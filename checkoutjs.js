@@ -129,6 +129,7 @@ function getItems() {
 
     $(".reset-button").click(function() {
         $('.empty').show();
+        if($(".all_items").parent().append === "<div class=\"all_items\">")
         $(".all_items").parent().append("<div class=\"all_items\">");
         $('table').html('<tr class="check">\n' +
             '        <th>Namn</th>\n' +
