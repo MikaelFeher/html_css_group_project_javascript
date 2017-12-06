@@ -27,5 +27,16 @@ var css = [
         name: 'color',
         price: 35,
         info: 'blaha blaha blaha'
-    }
+    },
+	{
+		name: 'flex-box',
+		price: 150,
+		info: 'Very cool'
+	},
+	{
+		name: 'justify-content',
+		price: 75,
+		info: 'Very cool indeed'
+	}
+
 ]

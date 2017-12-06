@@ -1,28 +1,107 @@
+var shoppingCart = [
+	{
+		name: 'font-weight',
+		amount: 3,
+	}
+];
+
 $(document).ready(function() {
-
-	for (var i = 0; i < html.length; i++) {
-		// console.log(html[i]);
-		// console.log(`${html[i].name} kostar ${html[i].price}kr och lite info: ${html[i].info}`);
-
-		$('#html_table').append(`
-			<tr>
-				<td>${html[i].name}</td>
-				<td>${html[i].price}kr</td>
-				<td><button class="product_buy_button">Köp</button></td>
-			</tr>`
-		);
-
+	if (!html.length) {
+		$('#html_table').append(`Vi har tyvärr inga produkter i denna kategorin.`)
+	} else {
+		for (var i = 0; i < html.length; i++) {
+			$('#html_table').append(`
+				<tr>
+					<td id="${html[i].name}">${html[i].name}</td>
+					<td>${html[i].price}kr</td>
+					<td><button class="product_buy_button" name="${html[i].name}">Köp</button></td>
+				</tr>`
+			);
+		}
 	}
-	for (var i = 0; i < css.length; i++) {
-		// console.log(html[i]);
-		// console.log(`${css[i].name} kostar ${css[i].price}kr och lite info: ${css[i].info}`);
 
-		$('#css_table').append(`
-			<tr>
-				<td>${css[i].name}</td>
-				<td>${css[i].price}kr</td>
-				<td><button class="product_buy_button">Köp</button></td>
-			</tr>`
-		);
+	if (!css.length) {
+		$('#css_table').append(`Vi har tyvärr inga produkter i denna kategorin.`)
+	} else {
+		for (var i = 0; i < css.length; i++) {
+			$('#css_table').append(`
+				<tr>
+					<td>${css[i].name}</td>
+					<td>${css[i].price}kr</td>
+					<td><button class="product_buy_button" name="${css[i].name}">Köp</button></td>
+				</tr>`
+			);
+		}
 	}
+
+	// var lsShoppingCart = localStorage.getItem('shoppingCart');
+
+	$('.product_buy_button').on('click', function(){
+		var itemName = $(this).attr('name');
+		console.log(itemName);
+		var result = shoppingCart.filter((item) => item.name === itemName);;
+
+		if (result.length === 0) {
+			console.log(`No item found`);
+			shoppingCart.push(
+				{
+					name: itemName,
+					amount: 1
+				}
+			)
+		} else {
+			for (var variable in result) {
+				console.log(`result: ${result[variable].name}`);
+			}
+
+			var itemToUpdate = shoppingCart.find(function (item) {
+				return item.name === itemName;
+			});
+
+			console.log(itemToUpdate.amount);
+			itemToUpdate.amount++;
+			console.log(itemToUpdate);
+		}
+		console.log('shoppingCart: ');
+		for (var item in shoppingCart) {
+			console.log(shoppingCart[item]);
+		}
+
+	})
+
+	// for(var item in lsShoppingCart) {
+	// 	$('#test').append(
+	// 		`<p>${item}</p>`
+	// 	)
+	// }
+
+
+
+	// jQuery SPA maybe?**********************************
+	// $('#products_link').on('click', function(event) {
+	// 	event.preventDefault();
+	// 	$.get({
+	// 		url:"index.html",
+	// 		type: "GET",
+	// 		dataType: "text",
+	// 		success: function(response) {
+	// 			$('#content').html(response);
+	// 		}
+	// 	});
+	// })
+
+	// DOESN'T WORK AT THE MOMENT!
+	// function showProducts(productTable) {
+	// 	if (!productTable.length) {
+	// 		$(`#${productTable}_table`).append(`Vi har tyvärr inga produkter i denna kategorin.`)
+	// 	} else {
+	// 		for (var i = 0; i < productTable.length; i++) {
+	// 			$(`#${productTable}_table`).append(`
+	// 				<tr>
+	// 					<td>${productTable[i].name}</td>	<td>${productTable[i].price}kr</td><td><button class="product_buy_button">Köp</button></td>
+	// 				</tr>`
+	// 			);
+	// 		}
+	// 	}
+	// }
 });
