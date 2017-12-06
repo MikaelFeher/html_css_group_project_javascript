@@ -1,9 +1,4 @@
-var shoppingCart = [
-	{
-		name: 'font-weight',
-		amount: 3,
-	}
-];
+var shoppingCart = [];
 
 $(document).ready(function() {
 	if (!html.length) {
@@ -33,10 +28,6 @@ $(document).ready(function() {
 			);
 		}
 	}
-
-	var lsShoppingCart = localStorage.getItem('shoppingCart');
-	console.log(`localStorage: ${lsShoppingCart}`);
-
 
 	$('.product_buy_button').on('click', function(){
 		var itemName = $(this).attr('name');
@@ -68,11 +59,11 @@ $(document).ready(function() {
 		}
 		localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
 
-		lsShoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-		console.log(`localStorage: ${lsShoppingCart}`);
+		shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+		console.log(`localStorage: ${shoppingCart}`);
 
-		for (var cartItem in lsShoppingCart) {
-			console.log(lsShoppingCart[cartItem]);
+		for (var cartItem in shoppingCart) {
+			console.log(shoppingCart[cartItem]);
 		}
 
 	})
@@ -88,7 +79,7 @@ $(document).ready(function() {
 	// jQuery SPA maybe?**********************************
 	// $('#products_link').on('click', function(event) {
 	// 	event.preventDefault();
-	// 	$.get({
+	// 	$.ajax({
 	// 		url:"index.html",
 	// 		type: "GET",
 	// 		dataType: "text",
