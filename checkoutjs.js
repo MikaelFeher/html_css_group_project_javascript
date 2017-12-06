@@ -108,7 +108,8 @@ function writeTotal() {
     });
 
 
-    $('.delete_button').click(function () {
+    $(".delete_button").click(deleteButton);
+    /**$('.delete_button').click(function () {
         $(this).closest('tr').remove();
 
         var subPrice = $(this).closest('.amount').val();
@@ -124,7 +125,7 @@ function writeTotal() {
             emptyCart();
 
         }
-    });
+    });*/
 
 
     $('.empty').click(function () {
@@ -167,5 +168,25 @@ function writeTotal() {
                 }
             }
         }
+        $(".delete_button").click(deleteButton);
     writeTotal()})
+
+    function deleteButton() {
+        $(this).closest('tr').remove();
+
+        var subPrice = $(this).closest('.amount').val();
+        var subAmount = $(this).closest('.amount').val();
+        var subTotal = subPrice * subAmount;
+
+        sum = Math.round(sum - subTotal).toFixed(2);
+
+        newTotPrice();
+
+        if (sum === 0) {
+
+            emptyCart();
+
+        }
+    }
 }
+
