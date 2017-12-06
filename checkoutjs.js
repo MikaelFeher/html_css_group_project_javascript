@@ -20,15 +20,14 @@ function getItems() {
             amount: 0,
             price: 20
         }
-    },
-        {
-            table: {
-                name: 'table',
-                amount: 12,
-                price: 100
-            }
+    }, {
+        table: {
+            name: 'table',
+            amount: 12,
+            price: 100
+        }
 
-        }];
+    }];
 
 
     var sum = 0;
