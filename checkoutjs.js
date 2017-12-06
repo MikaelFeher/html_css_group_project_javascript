@@ -2,6 +2,7 @@ $(getItems());
 
 function getItems() {
 
+    //var items = [];
     var items = [{
         div: {
             name: "div",
@@ -29,31 +30,35 @@ function getItems() {
 
     }];
 
-
     var sum = 0;
-    for (var i = 0; i < items.length; ++i) {
-        for (var x in items[i]) {
-            if (items[i][x].amount !== 0) {
-                $('.check').parent().append(
-                    '<tr data-price=' + items[i][x].price + ' ' + 'data-amount=' + items[i][x].amount + '>' + '<td>' + items[i][x].name
-                    + '</td>'
-                    + '<td>'
-                    + '<input class="amount" type="number"' + ' value=' + items[i][x].amount + '>'
-                    + '</td>'
-                    + '<td class="price">'
-                    + (items[i][x].price * items[i][x].amount)
-                    + '</td>'
-                    + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
-                console.log(items[i][x].name + ': ' + +items[i][x].amount * items[i][x].price);
+    if(items.length > 0) {
+        for (var i = 0; i < items.length; ++i) {
+            for (var x in items[i]) {
+                if (items[i][x].amount !== 0) {
+                    $('.check').parent().append(
+                        '<tr data-price=' + items[i][x].price + ' ' + 'data-amount=' + items[i][x].amount + '>' + '<td>' + items[i][x].name
+                        + '</td>'
+                        + '<td>'
+                        + '<input class="amount" type="number"' + ' value=' + items[i][x].amount + '>'
+                        + '</td>'
+                        + '<td class="price">'
+                        + (items[i][x].price * items[i][x].amount)
+                        + '</td>'
+                        + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
+                    console.log(items[i][x].name + ': ' + +items[i][x].amount * items[i][x].price);
 
 
-            } else {
-                console.log("zero amounts given")
+                } else {
+                    console.log("zero amounts given")
+                }
             }
         }
-    }
 
-    writeTotal();
+        writeTotal();
+    }
+    else {
+        emptyCart();
+    }
 
 
     //Functions
