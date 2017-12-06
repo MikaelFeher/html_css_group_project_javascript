@@ -53,6 +53,11 @@ function getItems() {
         }
     }
 
+    writeTotal();
+
+
+    //Functions
+function writeTotal() {
     $('.check').parent().append('<td>'
         + '</td>'
         + '<td>'
@@ -62,10 +67,11 @@ function getItems() {
         + '</td>'
         + '<td id="totalPrice">'
         + '</td>');
-
     newTotPrice();
 
-    //Functions
+}
+
+
     function newTotPrice() {
         sum = 0;
         $('.price').each(function (index, value) {
@@ -158,5 +164,5 @@ function getItems() {
                 }
             }
         }
-    })
+    writeTotal()})
 }
