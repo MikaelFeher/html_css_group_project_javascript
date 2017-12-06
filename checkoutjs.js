@@ -185,7 +185,7 @@ function writeTotal() {
         });
         $(".delete_button").click(deleteButton);
         if(items.length >= 0) {
-            $(".product_buy_button").show();
+            $("form").show();
         }
     writeTotal()})
 
@@ -208,7 +208,7 @@ function writeTotal() {
     }
 
     function emptyCheckout() {
-            $(".product_buy_button").hide();
+            $("form").hide();
     }
 }
 
