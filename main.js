@@ -1,4 +1,5 @@
-var shoppingCart = [];
+var localStorageShoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+var shoppingCart = localStorageShoppingCart ? localStorageShoppingCart : [];
 
 $(document).ready(function () {
     if (!html.length) {
