@@ -10,7 +10,7 @@ $(document).ready(function () {
 				<tr>
 					<td id="${html[i].name}">${html[i].name}</td>
 					<td>${html[i].price}kr</td>
-					<td><button class="product_buy_button" name="${html[i].name}" data-price="${html[i].price}">Köp</button></td>
+					<td><button class="product_buy_button" data-name="${html[i].name}" data-price="${html[i].price}">Köp</button></td>
 				</tr>`
             );
         }
@@ -24,15 +24,15 @@ $(document).ready(function () {
 				<tr>
 					<td>${css[i].name}</td>
 					<td>${css[i].price}kr</td>
-					<td><button class="product_buy_button" name="${css[i].name}" data-price="${css[i].price}">Köp</button></td>
+					<td><button class="product_buy_button" data-name="${css[i].name}" data-price="${css[i].price}">Köp</button></td>
 				</tr>`
             );
         }
     }
 
     $('.product_buy_button').on('click', function () {
-        var itemName = $(this).attr('name');
-        var itemPrice = $(this).data('price');
+        var itemName = $(this).attr('data-name');
+        var itemPrice = $(this).attr('data-price');
         console.log(itemName);
         console.log(itemPrice + "css price")
         var result = shoppingCart.filter((item) => item.name === itemName);
