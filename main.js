@@ -8,7 +8,7 @@ $(document).ready(function () {
         for (var i = 0; i < html.length; i++) {
             $('#html_table').append(`
 				<tr>
-					<td id="${html[i].name}">${html[i].name}</td>
+					<td class="product_name" data-productType="html">${html[i].name}</td>
 					<td>${html[i].price}kr</td>
 					<td><button class="product_buy_button" data-name="${html[i].name}" data-price="${html[i].price}">Köp</button></td>
 				</tr>`
@@ -22,7 +22,7 @@ $(document).ready(function () {
         for (var i = 0; i < css.length; i++) {
             $('#css_table').append(`
 				<tr>
-					<td>${css[i].name}</td>
+					<td class="product_name" data-productType="css">${css[i].name}</td>
 					<td>${css[i].price}kr</td>
 					<td><button class="product_buy_button" data-name="${css[i].name}" data-price="${css[i].price}">Köp</button></td>
 				</tr>`
@@ -30,13 +30,31 @@ $(document).ready(function () {
         }
     }
 
+	$('.product_name').on('click', function() {
+		var productName = $(this).text();
+		console.log(productName);
+
+		var productListToSerch = $(this).attr('data-productType');
+		console.log(productListToSerch);
+
+		var itemToPresent = findItemInProducts(productListToSerch, productName);
+
+
+		console.log(itemToPresent);
+
+		$('#product_info_container').html(`<h1>&lt;${itemToPresent.name}&gt;</h1>
+			<p>${itemToPresent.info}</p>
+			<p>Pris: ${itemToPresent.price}kr</p>`
+		)
+
+	})
+
     $('.product_buy_button').on('click', function () {
         var itemName = $(this).attr('data-name');
         var itemPrice = $(this).attr('data-price');
         console.log(itemName);
         console.log(itemPrice + "css price")
         var result = shoppingCart.filter((item) => item.name === itemName);
-        ;
 
         if (result.length === 0) {
             console.log(`No item found`);
@@ -72,6 +90,17 @@ $(document).ready(function () {
         }
 
     })
+
+	function findItemInProducts(list, name) {
+		var result;
+		if (list === 'html') {
+			result = html.find((item) => item.name === name);
+		} else {
+			result = css.find((item) => item.name === name);
+		}
+
+		return result;
+	};
 
     // for(var item in lsShoppingCart) {
     // 	$('#test').append(
