@@ -6,6 +6,11 @@ function getItems() {
     var items = JSON.parse(localStorage.getItem('shoppingCart'));
 
     var sum = 0;
+    var tax = 20;
+    var taxCalc = 1 + (tax / 100);
+    var shipping;
+
+
     if (items.length > 0) {
         for (var i = 0; i < items.length; ++i) {
             if (items[i].amount !== 0) {
@@ -36,7 +41,9 @@ function getItems() {
 
     //Functions
     function writeTotal() {
-        $('.check').parent().append('<td>'
+        $('.check').parent().append(
+            '<tr>'
+            + '<td>'
             + '</td>'
             + '<td>'
             + '</td>'
@@ -44,7 +51,46 @@ function getItems() {
             + 'Totalt: '
             + '</td>'
             + '<td id="totalPrice">'
-            + '</td>');
+            + '</td>'
+            + '</tr>'
+
+            + '<tr>'
+            + '<td>'
+            + '</td>'
+            + '<td>'
+            + '</td>'
+            + '<td>'
+            + 'moms: '
+            + '</td>'
+            + '<td id="tax">'
+            + '</td>'
+            + '</tr>'
+
+            + '<tr>'
+            + '<td>'
+            + '</td>'
+            + '<td>'
+            + '</td>'
+            + '<td>'
+            + 'Frakt: '
+            + '</td>'
+            + '<td id="shipping">'
+            + '</td>'
+            + '</tr>'
+
+            + '<tr>'
+            + '<td>'
+            + '</td>'
+            + '<td>'
+            + '</td>'
+            + '<td>'
+            + 'Att betala: '
+            + '</td>'
+            + '<td id="finalPrice">'
+            + '</td>'
+            + '</tr>'
+        );
+
         newTotPrice();
 
     }
@@ -56,9 +102,25 @@ function getItems() {
             sum = sum + parseInt(value.textContent);
             console.log(value.textContent);
         });
-        $('#totalPrice').text(sum + " kr")
+        $('#totalPrice').text(sum + "kr");
+        $('#tax').text(tax + "%");
 
+        if (shipping !== undefined) {
+            $('#finalPrice').text(Math.round((sum * taxCalc) + shipping).toFixed(2));
+            $('#shipping').text(shipping + "kr");
+        } else {
+            $('#finalPrice').text(Math.round(sum*taxCalc).toFixed(2) + 'kr');
+            $('#shipping').text("");
+        }
+        
     }
+
+
+    $('.shipping').click(function () {
+        shipping = $(this).data('shipping');
+
+        newTotPrice();
+    });
 
 
     function emptyCart() {
@@ -82,30 +144,13 @@ function getItems() {
             $(this).closest('tr').remove();
         }
         if (sum === 0) {
-            emptyCart()
+            emptyCart();
         }
 
     });
 
 
     $(".delete_button").click(deleteButton);
-    /**$('.delete_button').click(function () {
-        $(this).closest('tr').remove();
-
-        var subPrice = $(this).closest('.amount').val();
-        var subAmount = $(this).closest('.amount').val();
-        var subTotal = subPrice * subAmount;
-
-        sum = Math.round(sum - subTotal).toFixed(2);
-
-        newTotPrice();
-
-        if (sum === 0) {
-
-            emptyCart();
-
-        }
-    });*/
 
 
     $('.empty').click(function () {
@@ -156,7 +201,7 @@ function getItems() {
                 $(this).closest('tr').remove();
             }
             if (sum === 0) {
-                emptyCart()
+                emptyCart();
             }
 
         });
@@ -164,8 +209,8 @@ function getItems() {
         if (items.length >= 0) {
             $("form").show();
         }
-        writeTotal()
-    })
+        writeTotal();
+    });
 
     function deleteButton() {
         $(this).closest('tr').remove();
