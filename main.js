@@ -32,22 +32,24 @@ $(document).ready(function () {
 
 	$('.product_name').on('click', function() {
 		var productName = $(this).text();
-		console.log(productName);
-
 		var productListToSerch = $(this).attr('data-productType');
-		console.log(productListToSerch);
-
 		var itemToPresent = findItemInProducts(productListToSerch, productName);
 
+		$('#product_info_container').show().html(
+			`<div>
+				<h1>&lt;${itemToPresent.name}&gt;&lt;/${itemToPresent.name}&gt;</h1>
+				<button id="info_close_button">X</button>
+			</div>
+			<div><p>${itemToPresent.info}</p></div>
+			<div><p>Pris: ${itemToPresent.price}kr</p></div>`
+		);
 
-		console.log(itemToPresent);
+		$('#info_close_button').on('click', function() {
+			console.log('clicked');
+			$('#product_info_container').html('');
+		})
+	});
 
-		$('#product_info_container').html(`<h1>&lt;${itemToPresent.name}&gt;</h1>
-			<p>${itemToPresent.info}</p>
-			<p>Pris: ${itemToPresent.price}kr</p>`
-		)
-
-	})
 
     $('.product_buy_button').on('click', function () {
         var itemName = $(this).attr('data-name');

@@ -226,6 +226,23 @@ tr:nth-child(even) {
 	margin:0 auto;
 	text-align:left;
 }
+
+#product_info_container > div:first-of-type {
+	background-color: red;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#info_close_button {
+	padding: 3%;
+	background-color: cyan;
+
+}
+
+.product_name, button {
+	cursor: pointer;
+}
 /******** PRODUCT CONTENT END ********/
 
 
