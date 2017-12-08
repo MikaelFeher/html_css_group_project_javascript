@@ -3,7 +3,7 @@ $(getItems());
 function getItems() {
 
     //var items = [];
-    var items = JSON.parse(localStorage.getItem('shoppingCart'));
+    let items = JSON.parse(localStorage.getItem('shoppingCart'));
 
     var sum = 0;
     var tax = 20;
@@ -98,29 +98,24 @@ function getItems() {
 
     function newTotPrice() {
         sum = 0;
+
         $('.price').each(function (index, value) {
-            sum = sum + parseInt(value.textContent);
+            sum = (sum + parseFloat(value.textContent));
             console.log(value.textContent);
         });
-        $('#totalPrice').text(sum + "kr");
+
+        $('#totalPrice').text((sum).toFixed(2) + "kr");
         $('#tax').text(tax + "%");
 
         if (shipping !== undefined) {
-            $('#finalPrice').text(Math.round((sum * taxCalc) + shipping).toFixed(2));
+                $('#finalPrice').text(((sum * taxCalc) + shipping).toFixed(2) + 'kr');
             $('#shipping').text(shipping + "kr");
         } else {
-            $('#finalPrice').text(Math.round(sum*taxCalc).toFixed(2) + 'kr');
+            $('#finalPrice').text(parseFloat(sum*taxCalc).toFixed(2) + 'kr');
             $('#shipping').text("");
         }
-        
+
     }
-
-
-    $('.shipping').click(function () {
-        shipping = $(this).data('shipping');
-
-        newTotPrice();
-    });
 
 
     function emptyCart() {
@@ -133,11 +128,17 @@ function getItems() {
 
 
     //ClickEvents
+    $('.shipping').click(function () {
+        shipping = $(this).data('shipping');
+
+        newTotPrice();
+    });
+
     $('.amount').on('keyup change', function () {
 
         var amount = +$(this).val();
 
-        $(this).parent().next().text(amount * +$(this).closest('tr').data('price'));
+        $(this).parent().next().text((amount * +$(this).closest('tr').data('price')).toFixed(2));
         newTotPrice();
 
         if (amount === 0) {
@@ -215,15 +216,15 @@ function getItems() {
     function deleteButton() {
         $(this).closest('tr').remove();
 
-        var subPrice = $(this).closest('.amount').val();
-        var subAmount = $(this).closest('.amount').val();
-        var subTotal = subPrice * subAmount;
+        let subPrice = $(this).closest('.amount').val();
+        let subAmount = $(this).closest('.amount').val();
+        let subTotal = subPrice * subAmount;
 
-        sum = Math.round(sum - subTotal).toFixed(2);
+        sum = sum - subTotal;
 
         newTotPrice();
 
-        if (sum === 0) {
+        if (sum <= 0) {
 
             emptyCart();
 

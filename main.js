@@ -55,7 +55,7 @@ $(document).ready(function () {
         var itemName = $(this).attr('data-name');
         var itemPrice = $(this).attr('data-price');
         console.log(itemName);
-        console.log(itemPrice + "css price")
+        console.log(itemPrice + "css price");
         var result = shoppingCart.filter((item) => item.name === itemName);
 
         if (result.length === 0) {
