@@ -2,158 +2,160 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <title>Webshop - Kassan</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<title>Webshop - Kassan</title>
 </head>
 
 <body>
-<!-- HEADER -->
-<header>
-  <div class="header_logo_container">
-    <h1 class="header_logo">Web<span class="title">Pro</span></h1>
-  </div>
-  <div class="header_searchbar_container">
-    <span class="header_searchbar_icon">&#128270;</span><input type="text" class="header_searchbar"
-                                                               placeholder="Sök vara här...">
-  </div>
-  <div class="header_links_container">
-    <div class="header_links_listitem"><a href="index.html">Hem</a></div>
-    <div class="header_links_listitem"><a href="products.html">Produkter</a></div>
-    <div class="header_links_listitem"><a href="contact.html">Kontakt</a></div>
-    <div class="active_page"><a href="checkout.html">Till Kassan</a></div>
-  </div>
-</header>
-<!-- HEADER end -->
+	<!-- HEADER -->
+	<header>
+		<div class="header_logo_container">
+			<h1 class="header_logo">Web<span class="title">Pro</span></h1>
+		</div>
+		<div class="header_searchbar_container">
+			<span class="header_searchbar_icon">&#128270;</span><input type="text" class="header_searchbar"
+			placeholder="Sök vara här...">
+		</div>
+		<div class="header_links_container">
+			<div class="header_links_listitem"><a href="index.html">Hem</a></div>
+			<div class="header_links_listitem"><a href="products.html">Produkter</a></div>
+			<div class="header_links_listitem"><a href="contact.html">Kontakt</a></div>
+			<div class="active_page"><a href="checkout.html">Till Kassan</a></div>
+		</div>
+	</header>
+	<!-- HEADER end -->
 
-<!-- MAIN CONTENT -->
-<main id="checkout">
-  <h1>Varukorgen</h1>
-  <div class="all_items">
-    <table>
-      <tr class="check">
-        <th>Namn</th>
-        <th>Antal</th>
-        <th>Pris</th>
-        <th></th>
-      </tr>
+	<!-- MAIN CONTENT -->
+	<main id="checkout">
+		<h1>Varukorgen</h1>
+		<div class="all_items">
+			<table>
+				<tr class="check">
+					<th>Namn</th>
+					<th>Antal</th>
+					<th>Pris</th>
+					<th></th>
+				</tr>
 
-    </table>
+			</table>
 
-    <div id="button-container">
-      <div id="reset-cart-button-container">
-        <button class="reset-button">Återställ</button>
-      </div>
-      <div id="empty_cart_button_container ">
-        <button class="empty delete_button">Töm korgen</button>
-      </div>
+			<div id="button-container">
+				<div id="reset-cart-button-container">
+					<button class="reset-button">Återställ</button>
+				</div>
+				<div id="empty_cart_button_container ">
+					<button class="empty delete_button">Töm korgen</button>
+				</div>
 
-    </div>
-  </div>
-  <div id="totPrice"></div>
-  <div class="customer-information">
-    <h2>Kunduppgifter</h2>
+			</div>
+		</div>
+		<div id="totPrice"></div>
+		<div class="customer-information">
+			<h2>Kunduppgifter</h2>
 
-    <form class="contactForm" action="checkout.html" method="post">
-      <div class="left_side">
-        <div>
+			<form class="contactForm" action="checkout.html" method="post">
+				<div class="left_side">
+					<div>
 
-          <label class="labels">Förnamn:
-            <input id="contact-first-name" type="text" name="first_name" required pattern="[A-z]+" minlength="1">
-          </label>
-          <div class="errorMessage"></div>
-        </div>
+						<label class="labels">Förnamn:
+							<input type="text" name="first_name" id="first_name" required pattern="[A-z]+" minlength="1">
+						</label>
+						<div class="errorMessage"></div>
+					</div>
 
-        <div>
-          <label class="labels">Efternamn:
-            <input type="text" name="last_name" required pattern="[A-z]+" minlength="1">
-          </label>
-          <div class="errorMessage"></div>
-        </div>
+					<div>
+						<label class="labels">Efternamn:
+							<input type="text" name="last_name" id="last_name" required pattern="[A-z]+" minlength="1">
+						</label>
+						<div class="errorMessage"></div>
+					</div>
 
-        <div>
-          <label class="labels">Adress:
-            <input type="text" name="address" required>
-          </label>
-          <div class="errorMessage"></div>
-        </div>
+					<div>
+						<label class="labels">Address:
+							<input type="text" name="adress" id="adress" required>
+						</label>
+						<div class="errorMessage"></div>
+					</div>
 
-        <div>
-          <label class="labels">Postnr:
-            <input type="text" name="zip_code" required pattern="[0-9]{5}">
-          </label>
-          <div class="errorMessage"></div>
-        </div>
+					<div>
+						<label class="labels">Postnr:
+							<input type="text" name="zip_code" id="zip_code" required pattern="[0-9]{5}">
+						</label>
+						<div class="errorMessage"></div>
+					</div>
 
-        <div>
-          <label class="labels">Postort:
-            <input type="text" name="city" required pattern="[A-z- ]+" minlength="1">
-          </label>
-          <div class="errorMessage"></div>
-        </div>
+					<div>
+						<label class="labels">Postort:
+							<input type="text" name="city" id="city" required pattern="[A-z- ]+" minlength="1">
+						</label>
+						<div class="errorMessage"></div>
+					</div>
 
-        <div>
-          <label class="labels">Email:
-            <input type="email" name="email" required>
-          </label>
-          <div class="errorMessage"></div>
-        </div>
-      </div>
+					<div>
+						<label class="labels">Email:
+							<input type="email" name="email" id="email" required>
+						</label>
+						<div class="errorMessage"></div>
+					</div>
+				</div>
 
+				<div class="right_side">
 
+					Leveransmetod:
+					<div class="errorMessage"></div>
 
+					<label><input placeholder="" class="shipping" type="radio" name="delivery" value="standard" data-shipping="20" required>Standard</label>
+					<label><input class="shipping" type="radio" name="delivery" value="express" data-shipping="70" required>Express</label>
+					<label><input class="shipping" type="radio" name="delivery" value="home" data-shipping="100" required>Home delivery</label>
+					<label><input class="shipping" type="radio" name="delivery" value="digital" data-shipping="0" required>Digital</LABEL>
 
-      <div class="right_side">
+						<button class="product_buy_button purchase_button">Betala</button>
+					</div>
+				</form>
+			</div>
 
-        Leveransmetod:
-        <div class="errorMessage"></div>
+			<!-- PRODUCT INFORMATION MODAL -->
+			<div class="modal" id="order_modal">
+				<div class="modal_container" id="order_modal_container">
+					
+				</div>
+			</div>
 
-        <label><input placeholder="" class="shipping" type="radio" name="delivery" value="standard" data-shipping="20" required>Standard</label>
-        <label><input class="shipping" type="radio" name="delivery" value="express" data-shipping="70" required>Express</label>
-        <label><input class="shipping" type="radio" name="delivery" value="home" data-shipping="100" required>Home delivery</label>
-        <label><input class="shipping" type="radio" name="delivery" value="digital" data-shipping="0" required>Digital</LABEL>
+		</main>
+		<!-- MAIN CONTENT END -->
 
-        <button class="product_buy_button purchase_button">Betala</button>
-      </div>
-    </form>
-  </div>
-
-
-
-</main>
-<!-- MAIN CONTENT END -->
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer_copyright_container">
-    <p class="footer_logo">&copy;2017 3M&amp;F Solutions</p>
-  </div>
-  <div class="footer_social_container">
-    <p>Följ oss gärna i sociala medier:</p>
-    <div class="footer_social_icons_container">
-      <a href="https://www.facebook.com" target="_blank">
-        <img src="images/FB-fLogo-Blue-broadcast-2.png" alt="">
-      </a>
-      <a href="https://www.twitter.com" target="_blank">
-        <img src="images/Twitter_Social_Icon_Circle_Color.svg" alt="">
-      </a>
-    </div>
-  </div>
-  <div class="footer_contact_container">
-    <p>Kontakta gärna vår kundtjänst:</p>
-    <ul class="footer_contact_list">
-      <li class="footer_contact_listitem">Telefon: 555-1234</li>
-      <a href="mailto:contact@webshop.com">
-        <li class="footer_contact_listitem">Email: contact@webshop.com</li>
-      </a>
-    </ul>
-  </div>
-</footer>
-<!-- FOOTER end -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="checkoutjs.js"></script>
-</body>
-</html>
+		<!-- FOOTER -->
+		<footer>
+			<div class="footer_copyright_container">
+				<p class="footer_logo">&copy;2017 3M&amp;F Solutions</p>
+			</div>
+			<div class="footer_social_container">
+				<p>Följ oss gärna i sociala medier:</p>
+				<div class="footer_social_icons_container">
+					<a href="https://www.facebook.com" target="_blank">
+						<img src="images/FB-fLogo-Blue-broadcast-2.png" alt="">
+					</a>
+					<a href="https://www.twitter.com" target="_blank">
+						<img src="images/Twitter_Social_Icon_Circle_Color.svg" alt="">
+					</a>
+				</div>
+			</div>
+			<div class="footer_contact_container">
+				<p>Kontakta gärna vår kundtjänst:</p>
+				<ul class="footer_contact_list">
+					<li class="footer_contact_listitem">Telefon: 555-1234</li>
+					<a href="mailto:contact@webshop.com">
+						<li class="footer_contact_listitem">Email: contact@webshop.com</li>
+					</a>
+				</ul>
+			</div>
+		</footer>
+		<!-- FOOTER end -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="checkoutjs.js"></script>
+	</body>
+	</html>

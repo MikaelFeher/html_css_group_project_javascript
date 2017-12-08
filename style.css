@@ -222,28 +222,27 @@ tr:nth-child(even) {
 	box-shadow: inset 0 0 10px rgba(0, 255, 0, 1);
 }
 
-#product_info_modal {
+.modal {
 	position: absolute;
+	z-index: 10;
 	top: 0px;
 	height: 100vh;
 	width: 100vw;
 	background-color: rgba(0, 0, 0, .8);
 }
 
-#product_info_container {
+.modal_container {
 	top: 20%;
 	left: 30%;
 	position: absolute;
 	width:40%;
 	height: 60%;
-	margin:0 auto;
 	text-align:left;
 	background-color: white;
-	opacity: 1;
 	overflow-y: scroll;
 }
 
-#modal_wrapper {
+.modal_wrapper {
 	width: 100%;
 	padding: 5% 2%;
 	display: flex;
@@ -252,25 +251,25 @@ tr:nth-child(even) {
 	flex-direction: column;
 }
 
-#modal_wrapper div {
+.modal_wrapper div {
 	width: 100%;
 	margin: 1% 0;
 	height: 10%;
 }
 
-#modal_wrapper div:first-child {
+.modal_wrapper div:first-child {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 }
 
-#info_close_button {
+.modal_close_button {
 	padding: 1%;
 	border: 1px solid #333;
 	cursor: pointer;
 }
 
-#info_close_button:hover {
+.modal_close_button:hover {
 	background-color: red;
 	color: #fff;
 }
@@ -518,6 +517,10 @@ select {
 }
 .delete_button:hover {
 	box-shadow: inset 0 0 10px white;
+}
+
+tr {
+	height: 32px;
 }
 
 /******* CHECKOUT END ******/
