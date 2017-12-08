@@ -1,4 +1,3 @@
-
 $(getItems());
 
 function getItems() {
@@ -240,28 +239,25 @@ function getItems() {
 
     $(".purchase_button").click(function (e) {
         e.preventDefault();
-        var errorMessage="";
+        var errorMessage = "";
         var radioButtonChecked = true;
         var inputs = $(".contactForm").find("input");
-        var errors=$('.errorMessage');
+        var errors = $('.errorMessage');
         $('.errorMessage').html("");
 
         for (var i = 0; i < inputs.length; ++i) {
 
             if (!inputs[i].checkValidity()) {
-                if(inputs[i].type==='radio'){
+                if (inputs[i].type === 'radio') {
                     console.log('tjenA');
-                    radioButtonChecked=false;
-                }else{
+                    radioButtonChecked = false;
+                } else {
                     console.log(inputs[i].validationMessage);
-                    errorMessage=inputs[i].validationMessage;
+                    errorMessage = inputs[i].validationMessage;
 
                     errors.get(i).append(errorMessage);
-
-
                     console.log(errors.get(i))
                 }
-
 
 
             } else {
@@ -273,7 +269,7 @@ function getItems() {
         }
 
         if (!radioButtonChecked) {
-        $('.right_side > .errorMessage').append("Välj leverans")
+            $('.right_side > .errorMessage').append("Välj leverans")
 
 
         }
