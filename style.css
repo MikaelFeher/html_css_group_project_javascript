@@ -187,6 +187,7 @@ header {
 
 .table_container {
 	padding: 5px;
+	margin-bottom: 5%;
 }
 .table_container h2 {
 	margin-bottom: 5%;
@@ -221,30 +222,45 @@ tr:nth-child(even) {
 	box-shadow: inset 0 0 10px rgba(0, 255, 0, 1);
 }
 
+#product_info_modal {
+	position: absolute;
+	top: 0px;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0, 0, 0, .8);
+	/*opacity: .3;*/
+
+}
+
 #product_info_container {
-	width:600px;
+	top: 15%;
+	left: 30%;
+	position: absolute;
+	width:40%;
+	height: 600px;
 	margin:0 auto;
+	padding: .5% 1%;
 	text-align:left;
+	background-color: white;
+	opacity: 1;
 }
 
 #product_info_container > div:first-of-type {
-	background-color: red;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
 #info_close_button {
-	padding: 3%;
-	background-color: cyan;
-
+	padding: 1%;
+	border: 1px solid #333;
+	cursor: pointer;
 }
 
 .product_name, button {
 	cursor: pointer;
 }
 /******** PRODUCT CONTENT END ********/
-
 
 /********CONTACT CONTENT********/
 

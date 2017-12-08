@@ -1,6 +1,8 @@
 var localStorageShoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
 var shoppingCart = localStorageShoppingCart ? localStorageShoppingCart : [];
 
+$('#product_info_modal').hide();
+
 $(document).ready(function () {
     if (!html.length) {
         $('#html_table').append(`Vi har tyvärr inga produkter i denna kategorin.`)
@@ -8,7 +10,7 @@ $(document).ready(function () {
         for (var i = 0; i < html.length; i++) {
             $('#html_table').append(`
 				<tr>
-					<td class="product_name" data-productType="html">${html[i].name}</td>
+					<td class="product_name" data-productType="html" title="Klicka för mer info">${html[i].name}</td>
 					<td>${html[i].price}kr</td>
 					<td><button class="product_buy_button" data-name="${html[i].name}" data-price="${html[i].price}">Köp</button></td>
 				</tr>`
@@ -22,7 +24,7 @@ $(document).ready(function () {
         for (var i = 0; i < css.length; i++) {
             $('#css_table').append(`
 				<tr>
-					<td class="product_name" data-productType="css">${css[i].name}</td>
+					<td class="product_name" data-productType="css" title="Klicka för mer info">${css[i].name}</td>
 					<td>${css[i].price}kr</td>
 					<td><button class="product_buy_button" data-name="${css[i].name}" data-price="${css[i].price}">Köp</button></td>
 				</tr>`
@@ -35,17 +37,23 @@ $(document).ready(function () {
 		var productListToSerch = $(this).attr('data-productType');
 		var itemToPresent = findItemInProducts(productListToSerch, productName);
 
-		$('#product_info_container').show().html(
+		$('#product_info_modal').show();
+
+		$('#product_info_container').html(
 			`<div>
-				<h1>&lt;${itemToPresent.name}&gt;&lt;/${itemToPresent.name}&gt;</h1>
-				<button id="info_close_button">X</button>
+				<h1>${itemToPresent.name}</h1>
+				<span id="info_close_button">Stäng</span>
 			</div>
-			<div><p>${itemToPresent.info}</p></div>
+			<div>
+				<p>${itemToPresent.info}</p>
+				<p>Detta ingår:<br> &lt;${itemToPresent.name}&gt;&lt;/${itemToPresent.name}&gt;</p>
+			</div>
 			<div><p>Pris: ${itemToPresent.price}kr</p></div>`
 		);
 
 		$('#info_close_button').on('click', function() {
 			console.log('clicked');
+			$('#product_info_modal').hide();
 			$('#product_info_container').html('');
 		})
 	});
