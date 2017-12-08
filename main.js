@@ -40,15 +40,25 @@ $(document).ready(function () {
 		$('#product_info_modal').show();
 
 		$('#product_info_container').html(
-			`<div>
-				<h1>${itemToPresent.name}</h1>
-				<span id="info_close_button">Stäng</span>
-			</div>
-			<div>
-				<p>${itemToPresent.info}</p>
-				<p>Detta ingår:<br> &lt;${itemToPresent.name}&gt;&lt;/${itemToPresent.name}&gt;</p>
-			</div>
-			<div><p>Pris: ${itemToPresent.price}kr</p></div>`
+			`<div id="modal_wrapper">
+				<div>
+					<span id="info_close_button">Stäng</span>
+				</div>
+				<div id="info_header">
+					<h1>${itemToPresent.name}</h1>
+					<hr>
+				</div>
+				<div id="info_text">
+					<p>${itemToPresent.info}</p>
+					<p>Detta ingår:<br>
+						<span>&lt;${itemToPresent.name}&gt;&lt;/${itemToPresent.name}&gt;</span>
+					</p>
+				</div>
+				<div id="info_price">
+					<hr>
+					<h2>${itemToPresent.price}kr</h2>
+				</div>
+			</div>`
 		);
 
 		$('#info_close_button').on('click', function() {
