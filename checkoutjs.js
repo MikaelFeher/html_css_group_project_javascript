@@ -2,13 +2,14 @@ $(getItems());
 
 function getItems() {
 
-    //var items = [];
-    var items = JSON.parse(localStorage.getItem('shoppingCart'));
+    var items = [];
+    items = JSON.parse(localStorage.getItem('shoppingCart'));
 
     var sum = 0;
     var tax = 20;
     var taxCalc = 1 + (tax / 100);
     var shipping;
+	var tempShoppingCartForRestoring = items;
 
 
     if (items.length > 0) {
@@ -124,6 +125,8 @@ function getItems() {
         $('tr').remove();
         $('table').html('Varukorgen är tom');
         emptyCheckout();
+		localStorage.removeItem('shoppingCart');
+		localStorage.setItem('tempShoppingCartForRestoring', JSON.stringify(items));
     }
 
 
@@ -162,9 +165,15 @@ function getItems() {
     $(".reset-button").click(function () {
         $('.empty').show();
 
-        if ($(".all_items").parent().append === "<div class=\"all_items\">") {
-            $(".all_items").parent().append("<div class=\"all_items\">");
-        }
+		var tempShoppingCartForRestoringLocalStorage = JSON.parse(localStorage.getItem('tempShoppingCartForRestoring'));
+
+		items = tempShoppingCartForRestoringLocalStorage.length > 0 ? tempShoppingCartForRestoringLocalStorage : tempShoppingCartForRestoring;
+
+
+
+        // if ($(".all_items").parent().append === "<div class=\"all_items\">") {
+        //     $(".all_items").parent().append("<div class=\"all_items\">");
+        // }
 
         $('table').html('<tr class="check">\n' +
             '        <th>Namn</th>\n' +
@@ -276,4 +285,3 @@ function getItems() {
 
     });
 }
-
