@@ -1,3 +1,4 @@
+
 $(getItems());
 
 function getItems() {
@@ -108,10 +109,10 @@ function getItems() {
         $('#tax').text(tax + "%");
 
         if (shipping !== undefined) {
-                $('#finalPrice').text(((sum * taxCalc) + shipping).toFixed(2) + 'kr');
+            $('#finalPrice').text(((sum * taxCalc) + shipping).toFixed(2) + 'kr');
             $('#shipping').text(shipping + "kr");
         } else {
-            $('#finalPrice').text(parseFloat(sum*taxCalc).toFixed(2) + 'kr');
+            $('#finalPrice').text(parseFloat(sum * taxCalc).toFixed(2) + 'kr');
             $('#shipping').text("");
         }
 
@@ -141,10 +142,10 @@ function getItems() {
         $(this).parent().next().text((amount * +$(this).closest('tr').data('price')).toFixed(2));
         newTotPrice();
 
-        if (amount === 0) {
+        if (amount === 0 || amount < 0) {
             $(this).closest('tr').remove();
         }
-        if (sum === 0) {
+        if (sum === 0 || sum < 0) {
             emptyCart();
         }
 
@@ -232,28 +233,51 @@ function getItems() {
     }
 
     function emptyCheckout() {
+
         $("form").hide();
+
     }
 
-    $(".purchase_button").click(function(e) {
+    $(".purchase_button").click(function (e) {
         e.preventDefault();
+        var errorMessage="";
+        var radioButtonChecked = true;
+        var inputs = $(".contactForm").find("input");
+        var errors=$('.errorMessage');
+        $('.errorMessage').html("");
 
-        var isOk = true;
-        var test = $(".contactForm").find("input");
-        for(var i = 0; i < test.length; ++i) {
-            if (!test[i].checkValidity()) {
-                isOk = false;
-                console.log(test[i].validationMessage);
-                return;
+        for (var i = 0; i < inputs.length; ++i) {
+
+            if (!inputs[i].checkValidity()) {
+                if(inputs[i].type==='radio'){
+                    console.log('tjenA');
+                    radioButtonChecked=false;
+                }else{
+                    console.log(inputs[i].validationMessage);
+                    errorMessage=inputs[i].validationMessage;
+
+                    errors.get(i).append(errorMessage);
+
+
+                    console.log(errors.get(i))
+                }
+
+
+
             } else {
+
                 console.log("Input OK");
+
             }
-        }
-
-        if(!isOk) {
 
         }
 
-    })
+        if (!radioButtonChecked) {
+        $('.right_side > .errorMessage').append("Välj leverans")
+
+
+        }
+
+    });
 }
 

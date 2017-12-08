@@ -60,40 +60,58 @@
     <form class="contactForm" action="checkout.html" method="post">
       <div class="left_side">
         <div>
+
           <label class="labels">Förnamn:
             <input id="contact-first-name" type="text" name="first_name" required pattern="[A-z]+" minlength="1">
           </label>
+          <div class="errorMessage"></div>
         </div>
+
         <div>
           <label class="labels">Efternamn:
             <input type="text" name="last_name" required pattern="[A-z]+" minlength="1">
           </label>
+          <div class="errorMessage"></div>
         </div>
+
         <div>
           <label class="labels">Adress:
             <input type="text" name="address" required>
           </label>
+          <div class="errorMessage"></div>
         </div>
+
         <div>
           <label class="labels">Postnr:
             <input type="text" name="zip_code" required pattern="[0-9]{5}">
           </label>
+          <div class="errorMessage"></div>
         </div>
+
         <div>
           <label class="labels">Postort:
             <input type="text" name="city" required pattern="[A-z- ]+" minlength="1">
           </label>
+          <div class="errorMessage"></div>
         </div>
+
         <div>
           <label class="labels">Email:
             <input type="email" name="email" required>
           </label>
+          <div class="errorMessage"></div>
         </div>
       </div>
 
+
+
+
       <div class="right_side">
+
         Leveransmetod:
-        <label><input class="shipping" type="radio" name="delivery" value="standard" data-shipping="20" required>Standard</label>
+        <div class="errorMessage"></div>
+
+        <label><input placeholder="" class="shipping" type="radio" name="delivery" value="standard" data-shipping="20" required>Standard</label>
         <label><input class="shipping" type="radio" name="delivery" value="express" data-shipping="70" required>Express</label>
         <label><input class="shipping" type="radio" name="delivery" value="home" data-shipping="100" required>Home delivery</label>
         <label><input class="shipping" type="radio" name="delivery" value="digital" data-shipping="0" required>Digital</LABEL>
@@ -102,6 +120,9 @@
       </div>
     </form>
   </div>
+
+
+
 </main>
 <!-- MAIN CONTENT END -->
 

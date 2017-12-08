@@ -285,15 +285,24 @@ tr:nth-child(even) {
 .labels {
 	display: flex;
 	justify-content: space-between;
+	flex-direction: column;
+	text-align: left;
 	width: 230px;
-	margin-bottom: 10px;
 }
+
 
 .message {
 	max-height: 200px;
 	max-width: 1000px;
 	min-width: 250px;
 	resize: none;
+}
+
+.errorMessage{
+	margin-bottom: 10px;
+	color:red;
+	font-size: 12px;
+	text-align: left;
 }
 
 select {
@@ -403,9 +412,12 @@ select {
 #checkout form .right_side {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+
 	text-align: left;
 }
+
+.shipping{margin-bottom:10px;}
+
 .purchase_button {
 	display: flex;
 	justify-content: space-around;
@@ -468,9 +480,7 @@ footer {
 	select {
 		margin-bottom: 5px;
 	}
-	.labels {
-		margin-bottom: 5px;
-	}
+
 	.message {
 		width: 230px;
 		resize: none;
