@@ -3,7 +3,7 @@ $(getItems());
 function getItems() {
 
     //var items = [];
-    let items = JSON.parse(localStorage.getItem('shoppingCart'));
+    var items = JSON.parse(localStorage.getItem('shoppingCart'));
 
     var sum = 0;
     var tax = 20;
@@ -216,9 +216,9 @@ function getItems() {
     function deleteButton() {
         $(this).closest('tr').remove();
 
-        let subPrice = $(this).closest('.amount').val();
-        let subAmount = $(this).closest('.amount').val();
-        let subTotal = subPrice * subAmount;
+        var subPrice = $(this).closest('.amount').val();
+        var subAmount = $(this).closest('.amount').val();
+        var subTotal = subPrice * subAmount;
 
         sum = sum - subTotal;
 
@@ -234,5 +234,26 @@ function getItems() {
     function emptyCheckout() {
         $("form").hide();
     }
+
+    $(".purchase_button").click(function(e) {
+        e.preventDefault();
+
+        var isOk = true;
+        var test = $(".contactForm").find("input");
+        for(var i = 0; i < test.length; ++i) {
+            if (!test[i].checkValidity()) {
+                isOk = false;
+                console.log(test[i].validationMessage);
+                return;
+            } else {
+                console.log("Input OK");
+            }
+        }
+
+        if(!isOk) {
+
+        }
+
+    })
 }
 
