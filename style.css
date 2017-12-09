@@ -226,25 +226,28 @@ tr:nth-child(even) {
 	position: absolute;
 	z-index: 10;
 	top: 0px;
-	height: 100vh;
+	height: 100%;
 	width: 100vw;
 	background-color: rgba(0, 0, 0, .8);
 }
 
 .modal_container {
-	top: 20%;
-	left: 30%;
-	position: absolute;
-	width:40%;
-	height: 60%;
+
+
+	margin:60px 25%;
+	width:auto;
+	height: auto;
+	max-height:600px;
+
+	overflow: scroll;
 	text-align:left;
 	background-color: white;
-	overflow-y: scroll;
+	padding:64px;
 }
 
 .modal_wrapper {
 	width: 100%;
-	padding: 5% 2%;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -264,6 +267,7 @@ tr:nth-child(even) {
 }
 
 .modal_close_button {
+	float: right;
 	padding: 1%;
 	border: 1px solid #333;
 	cursor: pointer;
@@ -291,7 +295,7 @@ tr:nth-child(even) {
 #info_text {
 	height: 70%;
 	padding: 2%;
-	margin: 10% 0;
+
 }
 
 #info_text p {
