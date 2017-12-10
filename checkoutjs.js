@@ -23,7 +23,7 @@ function getItems() {
 	}
 	var order = [];
 
-    if (items.length > 0) {
+    if (items != undefined) {
         for (var i = 0; i < items.length; ++i) {
             if (items[i].amount !== 0) {
                 $('.check').parent().append(
