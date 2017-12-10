@@ -34,8 +34,8 @@ $(document).ready(function () {
 
 	$('.product_name').on('click', function() {
 		var productName = $(this).text();
-		var productListToSerch = $(this).attr('data-productType');
-		var itemToPresent = findItemInProducts(productListToSerch, productName);
+		var productListToSearch = $(this).attr('data-productType');
+		var itemToPresent = findItemInProducts(productListToSearch, productName);
 
 		$('.modal').show();
 

@@ -3,9 +3,9 @@ $('.modal').hide();
 $(getItems());
 
 function getItems() {
-
+	var localStorageShoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     var items = [];
-    items = JSON.parse(localStorage.getItem('shoppingCart'));
+    items = localStorageShoppingCart;
 
     var sum = 0;
     var tax = 20;
@@ -31,24 +31,13 @@ function getItems() {
 					`<tr data-price=${items[i].price} data-amount=${items[i].amount}>
 						<td>${items[i].name}</td>
 						<td>
-							<input class="amount" type="number" value=${items[i].amount}>
+							<input class="amount" type="number" data-name=${items[i].name} value=${items[i].amount}>
 						</td>
 						<td class="price">${items[i].price * items[i].amount}</td>
 						<td class="table_button">
 							<button class="delete_button"><span>ta bort</span></button>
 						</td>
 					</tr>`
-
-                    // '<tr data-price=' + items[i].price + ' ' + 'data-amount=' + items[i].amount + '>' + '<td>' + items[i].name
-                    // + '</td>'
-                    // + '<td>'
-                    // + '<input class="amount" type="number"' + ' value=' + items[i].amount + '>'
-                    // + '</td>'
-                    // + '<td class="price">'
-                    // + (items[i].price * items[i].amount)
-                    // + '</td>'
-                    // + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
-
 				);
 
                 console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
@@ -69,53 +58,30 @@ function getItems() {
     //Functions
     function writeTotal() {
         $('.check').parent().append(
-            '<tr>'
-            + '<td>'
-            + '</td>'
-            + '<td>'
-            + '</td>'
-            + '<td>'
-            + 'Totalt: '
-            + '</td>'
-            + '<td id="totalPrice">'
-            + '</td>'
-            + '</tr>'
-
-            + '<tr>'
-            + '<td>'
-            + '</td>'
-            + '<td>'
-            + '</td>'
-            + '<td>'
-            + 'moms: '
-            + '</td>'
-            + '<td id="tax">'
-            + '</td>'
-            + '</tr>'
-
-            + '<tr>'
-            + '<td>'
-            + '</td>'
-            + '<td>'
-            + '</td>'
-            + '<td>'
-            + 'Frakt: '
-            + '</td>'
-            + '<td id="shipping">'
-            + '</td>'
-            + '</tr>'
-
-            + '<tr>'
-            + '<td>'
-            + '</td>'
-            + '<td>'
-            + '</td>'
-            + '<td>'
-            + 'Att betala: '
-            + '</td>'
-            + '<td id="finalPrice">'
-            + '</td>'
-            + '</tr>'
+            `<tr>
+            	<td></td>
+            	<td></td>'
+            	<td>Totalt: </td>
+            	<td id="totalPrice"></td>
+            </tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td>moms:</td>
+            	<td id="tax"></td>
+            </tr>
+            <tr>'
+	            <td></td>
+				<td></td>
+				<td>Frakt: </td>
+	            <td id="shipping"></td>'
+            </tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td>Att betala: </td>
+				<td id="finalPrice"></td>
+			</tr>`
         );
 
         newTotPrice();
@@ -164,8 +130,18 @@ function getItems() {
     });
 
     $('.amount').on('keyup change', function () {
+		var amount = +$(this).val();
+		var itemName = $(this).attr('data-name');
+		console.log(itemName);
 
-        var amount = +$(this).val();
+		var itemToUpdate = items.find((thing) => thing.name === itemName);
+		console.log(itemToUpdate);
+		itemToUpdate.amount = amount;
+		console.log(itemToUpdate);
+
+		
+		localStorage.setItem('shoppingCart', JSON.stringify(items));
+		items = JSON.parse(localStorage.getItem('shoppingCart'));
 
         $(this).parent().next().text((amount * +$(this).closest('tr').data('price')).toFixed(2));
         newTotPrice();
@@ -193,7 +169,9 @@ function getItems() {
 
 		var tempShoppingCartForRestoringLocalStorage = JSON.parse(localStorage.getItem('tempShoppingCartForRestoring'));
 
-		items = tempShoppingCartForRestoringLocalStorage.length > 0 ? tempShoppingCartForRestoringLocalStorage : tempShoppingCartForRestoring;
+		// items = tempShoppingCartForRestoringLocalStorage.length > 0 ? tempShoppingCartForRestoringLocalStorage : tempShoppingCartForRestoring;
+
+		items = localStorageShoppingCart ? localStorageShoppingCart : tempShoppingCartForRestoringLocalStorage;
 
 
 
