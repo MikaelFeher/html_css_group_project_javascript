@@ -129,10 +129,10 @@ function getItems() {
         newTotPrice();
     });
 
-    $('.amount').on('keyup change', function () {
+    $(document).on('mouseup', ".amount", function () {
 		var amount = +$(this).val();
 		var itemName = $(this).attr('data-name');
-		console.log(itemName);
+		console.log(items);
 
 		var itemToUpdate = items.find((thing) => thing.name === itemName);
 		console.log(itemToUpdate);
@@ -170,7 +170,7 @@ function getItems() {
 		var tempShoppingCartForRestoringLocalStorage = JSON.parse(localStorage.getItem('tempShoppingCartForRestoring'));
 
 		// items = tempShoppingCartForRestoringLocalStorage.length > 0 ? tempShoppingCartForRestoringLocalStorage : tempShoppingCartForRestoring;
-
+        localStorage.removeItem('tempShoppingCartForRestoring');
 		items = localStorageShoppingCart ? localStorageShoppingCart : tempShoppingCartForRestoringLocalStorage;
 
 
@@ -188,15 +188,19 @@ function getItems() {
         for (var i = 0; i < items.length; ++i) {
             if (items[i].amount !== 0) {
                 $('.check').parent().append(
-                    '<tr data-price=' + items[i].price + ' ' + 'data-amount=' + items[i].amount + '>' + '<td>' + items[i].name
-                    + '</td>'
-                    + '<td>'
-                    + '<input class="amount" type="number"' + ' value=' + items[i].amount + '>'
-                    + '</td>'
-                    + '<td class="price">'
-                    + (items[i].price * items[i].amount)
-                    + '</td>'
-                    + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
+
+                    `<tr data-price=${items[i].price} data-amount=${items[i].amount}>
+						<td>${items[i].name}</td>
+						<td>
+							<input class="amount" type="number" data-name=${items[i].name} value=${items[i].amount}>
+						</td>
+						<td class="price">${items[i].price * items[i].amount}</td>
+						<td class="table_button">
+							<button class="delete_button"><span>ta bort</span></button>
+						</td>
+					</tr>`
+                );
+
                 console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
 
 
@@ -204,7 +208,7 @@ function getItems() {
                 console.log("zero amounts given")
             }
         }
-        $('.amount').on('keyup change', function () {
+        /*$('.amount').on('keyup change', function () {
 
             var amount = +$(this).val();
 
@@ -218,7 +222,7 @@ function getItems() {
                 emptyCart();
             }
 
-        });
+        });*/
         $(".delete_button").click(deleteButton);
         if (items.length >= 0) {
             $("form").show();
