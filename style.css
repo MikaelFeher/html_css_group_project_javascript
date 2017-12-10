@@ -22,6 +22,10 @@ body {
 	color: red;
 }
 
+ul{
+	list-style-type: none;
+}
+
 /************ HEADER ************/
 
 header {
@@ -229,11 +233,12 @@ tr:nth-child(even) {
 	height: 100%;
 	width: 100vw;
 	background-color: rgba(0, 0, 0, .8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .modal_container {
-
-
 	margin:60px 25%;
 	width:auto;
 	height: auto;

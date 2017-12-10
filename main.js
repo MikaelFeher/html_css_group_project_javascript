@@ -67,7 +67,6 @@ $(document).ready(function () {
 		})
 	});
 
-
     $('.product_buy_button').on('click', function () {
         var itemName = $(this).attr('data-name');
         var itemPrice = $(this).attr('data-price');

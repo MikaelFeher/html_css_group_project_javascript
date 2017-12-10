@@ -11,7 +11,6 @@ function getItems() {
     var tax = 20;
     var taxCalc = 1 + (tax / 100);
     var shipping;
-	var tempShoppingCartForRestoring = items;
 	var customer = {
 		first_name: '',
 		last_name: '',
@@ -21,7 +20,6 @@ function getItems() {
 		email: '',
 		shipping_method: ''
 	}
-	var order = [];
 
     if (items != undefined) {
         for (var i = 0; i < items.length; ++i) {
@@ -39,12 +37,6 @@ function getItems() {
 						</td>
 					</tr>`
 				);
-
-                console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
-
-
-            } else {
-                console.log("zero amounts given")
             }
         }
 
@@ -53,7 +45,6 @@ function getItems() {
     else {
         emptyCart();
     }
-
 
     //Functions
     function writeTotal() {
@@ -85,17 +76,14 @@ function getItems() {
         );
 
         newTotPrice();
-
     }
-
 
     function newTotPrice() {
         sum = 0;
 
-        $('.price').each(function (index, value) {
-            sum = (sum + parseFloat(value.textContent));
-            console.log(value.textContent);
-        });
+		for (var item in items) {
+			sum += items[item].amount * items[item].price;
+		}
 
         $('#totalPrice').text((sum).toFixed(2) + "kr");
         $('#tax').text(tax + "%");
@@ -110,17 +98,13 @@ function getItems() {
 
     }
 
-
     function emptyCart() {
         sum = 0;
         $('.empty').hide();
         $('tr').remove();
         $('table').html('Varukorgen är tom');
         emptyCheckout();
-		localStorage.removeItem('shoppingCart');
-		localStorage.setItem('tempShoppingCartForRestoring', JSON.stringify(items));
     }
-
 
     //ClickEvents
     $('.shipping').click(function () {
@@ -129,17 +113,13 @@ function getItems() {
         newTotPrice();
     });
 
-    $(document).on('mouseup', ".amount", function () {
+    $(document).on('mouseup','.amount', function () {
 		var amount = +$(this).val();
 		var itemName = $(this).attr('data-name');
-		console.log(items);
 
 		var itemToUpdate = items.find((thing) => thing.name === itemName);
-		console.log(itemToUpdate);
 		itemToUpdate.amount = amount;
-		console.log(itemToUpdate);
 
-		
 		localStorage.setItem('shoppingCart', JSON.stringify(items));
 		items = JSON.parse(localStorage.getItem('shoppingCart'));
 
@@ -148,19 +128,20 @@ function getItems() {
 
         if (amount === 0 || amount < 0) {
             $(this).closest('tr').remove();
+			items = items.filter((thing) => thing.amount !== 0)
         }
         if (sum === 0 || sum < 0) {
+			localStorage.removeItem('shoppingCart');
+			item = [];
             emptyCart();
         }
-
     });
-
 
     $(".delete_button").click(deleteButton);
 
-
     $('.empty').click(function () {
-
+		localStorage.setItem('tempShoppingCartForRestoring', JSON.stringify(items));
+		localStorage.removeItem('shoppingCart');
         emptyCart();
     });
 
@@ -169,15 +150,8 @@ function getItems() {
 
 		var tempShoppingCartForRestoringLocalStorage = JSON.parse(localStorage.getItem('tempShoppingCartForRestoring'));
 
-		// items = tempShoppingCartForRestoringLocalStorage.length > 0 ? tempShoppingCartForRestoringLocalStorage : tempShoppingCartForRestoring;
-        localStorage.removeItem('tempShoppingCartForRestoring');
-		items = localStorageShoppingCart ? localStorageShoppingCart : tempShoppingCartForRestoringLocalStorage;
-
-
-
-        // if ($(".all_items").parent().append === "<div class=\"all_items\">") {
-        //     $(".all_items").parent().append("<div class=\"all_items\">");
-        // }
+		items = tempShoppingCartForRestoringLocalStorage;
+		localStorage.removeItem('tempShoppingCartForRestoring');
 
         $('table').html('<tr class="check">\n' +
             '        <th>Namn</th>\n' +
@@ -185,11 +159,10 @@ function getItems() {
             '        <th>Pris</th>\n' +
             '        <th></th>\n' +
             '      </tr>');
-        for (var i = 0; i < items.length; ++i) {
+		for (var i = 0; i < items.length; ++i) {
             if (items[i].amount !== 0) {
                 $('.check').parent().append(
-
-                    `<tr data-price=${items[i].price} data-amount=${items[i].amount}>
+					`<tr data-price=${items[i].price} data-amount=${items[i].amount}>
 						<td>${items[i].name}</td>
 						<td>
 							<input class="amount" type="number" data-name=${items[i].name} value=${items[i].amount}>
@@ -199,30 +172,10 @@ function getItems() {
 							<button class="delete_button"><span>ta bort</span></button>
 						</td>
 					</tr>`
-                );
-
-                console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
-
-
-            } else {
-                console.log("zero amounts given")
+				);
             }
         }
-        /*$('.amount').on('keyup change', function () {
 
-            var amount = +$(this).val();
-
-            $(this).parent().next().text(amount * +$(this).closest('tr').data('price'));
-            newTotPrice();
-
-            if (amount === 0) {
-                $(this).closest('tr').remove();
-            }
-            if (sum === 0) {
-                emptyCart();
-            }
-
-        });*/
         $(".delete_button").click(deleteButton);
         if (items.length >= 0) {
             $("form").show();
@@ -249,9 +202,7 @@ function getItems() {
     }
 
     function emptyCheckout() {
-
         $("form").hide();
-
     }
 
     $(".purchase_button").click(function (e) {
@@ -266,17 +217,11 @@ function getItems() {
 
             if (!inputs[i].checkValidity()) {
                 if (inputs[i].type === 'radio') {
-                    console.log('tjenA');
                     radioButtonChecked = false;
                 } else {
-                    console.log(inputs[i].validationMessage);
                     errorMessage = inputs[i].validationMessage;
-
-                    errors.get(i).append(errorMessage);
-                    console.log(errors.get(i))
+					errors.get(i).append(errorMessage);
                 }
-            } else {
-                console.log("Input OK");
             }
         }
 
@@ -292,6 +237,15 @@ function getItems() {
 
 	function renderOrderConfirmation() {
 		$('.modal').show();
+		var order = items;
+		var orderItems = '';
+		for(var i = 0; i < order.length; i++) {
+			orderItems +=	`<tr>
+						<td>${order[i].name}</td>
+						<td>${order[i].amount}</td>
+						<td>${order[i].amount * order[i].price}kr</td>
+					</tr>`
+		}
 		$('#order_modal_container').append(
 			`<div>
 				<span class="modal_close_button">Stäng</span>
@@ -308,28 +262,29 @@ function getItems() {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>&lt;p&gt;</td>
-						<td>3</td>
-						<td>29.97kr</td>
-					</tr>
+					${orderItems}
 					<tr>
 						<!-- Empty row. Leave it in... that's what she said... -->
 					</tr>
 					<tr>
 						<td></td>
 						<td></td>
-						<td>Pris: 29.97kr</td>
+						<td>Pris: ${sum}kr</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td></td>
-						<td>Frakt: 50kr</td>
+						<td>Moms: ${tax}%</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td></td>
-						<td>Totalsumma: 79.97kr</td>
+						<td>Frakt: ${shipping}kr</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td>Totalsumma: ${((sum * taxCalc) + shipping).toFixed(2)}kr</td>
 					</tr>
 				</tbody>
 			</table>
@@ -345,7 +300,6 @@ function getItems() {
 			</div>`
 		)
 		$('.modal_close_button').on('click', function() {
-			console.log('clicked');
 			$('.modal').hide();
 			$('.modal_container').html('');
 		})
@@ -361,6 +315,5 @@ function getItems() {
 			email: $('#email').val(),
 			shipping_method: ''
 		}
-		console.log(customer);
 	}
 }
