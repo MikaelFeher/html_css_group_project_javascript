@@ -27,15 +27,30 @@ function getItems() {
         for (var i = 0; i < items.length; ++i) {
             if (items[i].amount !== 0) {
                 $('.check').parent().append(
-                    '<tr data-price=' + items[i].price + ' ' + 'data-amount=' + items[i].amount + '>' + '<td>' + items[i].name
-                    + '</td>'
-                    + '<td>'
-                    + '<input class="amount" type="number"' + ' value=' + items[i].amount + '>'
-                    + '</td>'
-                    + '<td class="price">'
-                    + (items[i].price * items[i].amount)
-                    + '</td>'
-                    + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
+
+					`<tr data-price=${items[i].price} data-amount=${items[i].amount}>
+						<td>${items[i].name}</td>
+						<td>
+							<input class="amount" type="number" value=${items[i].amount}>
+						</td>
+						<td class="price">${items[i].price * items[i].amount}</td>
+						<td class="table_button">
+							<button class="delete_button"><span>ta bort</span></button>
+						</td>
+					</tr>`
+
+                    // '<tr data-price=' + items[i].price + ' ' + 'data-amount=' + items[i].amount + '>' + '<td>' + items[i].name
+                    // + '</td>'
+                    // + '<td>'
+                    // + '<input class="amount" type="number"' + ' value=' + items[i].amount + '>'
+                    // + '</td>'
+                    // + '<td class="price">'
+                    // + (items[i].price * items[i].amount)
+                    // + '</td>'
+                    // + '<td class="table_button"><button class="delete_button"><span>ta bort</span></button></td></tr>');
+
+				);
+
                 console.log(items[i].name + ': ' + +items[i].amount * items[i].price);
 
 
