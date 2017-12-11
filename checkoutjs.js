@@ -159,28 +159,32 @@ function getItems() {
             '        <th>Pris</th>\n' +
             '        <th></th>\n' +
             '      </tr>');
-		for (var i = 0; i < items.length; ++i) {
-            if (items[i].amount !== 0) {
-                $('.check').parent().append(
-					`<tr data-price=${items[i].price} data-amount=${items[i].amount}>
-						<td>${items[i].name}</td>
-						<td>
-							<input class="amount" type="number" data-name=${items[i].name} value=${items[i].amount}>
-						</td>
-						<td class="price">${items[i].price * items[i].amount}</td>
-						<td class="table_button">
-							<button class="delete_button"><span>ta bort</span></button>
-						</td>
-					</tr>`
-				);
-            }
-        }
+		if (items != undefined) {
+			for (var i = 0; i < items.length; ++i) {
+	            if (items[i].amount !== 0) {
+	                $('.check').parent().append(
+						`<tr data-price=${items[i].price} data-amount=${items[i].amount}>
+							<td>${items[i].name}</td>
+							<td>
+								<input class="amount" type="number" data-name=${items[i].name} value=${items[i].amount}>
+							</td>
+							<td class="price">${items[i].price * items[i].amount}</td>
+							<td class="table_button">
+								<button class="delete_button"><span>ta bort</span></button>
+							</td>
+						</tr>`
+					);
+	            }
+	        }
+			$(".delete_button").click(deleteButton);
+			if (items.length >= 0) {
+				$("form").show();
+			}
+			writeTotal();
+		} else {
+			emptyCart();
+		}
 
-        $(".delete_button").click(deleteButton);
-        if (items.length >= 0) {
-            $("form").show();
-        }
-        writeTotal();
     });
 
     function deleteButton() {
